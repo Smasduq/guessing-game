@@ -12,14 +12,20 @@ fn main() {
 
     
     loop {
-    println!("Please enter a number");
+    println!("Enter a number");
     let mut guess = String::new();
 
     io::stdin()
         .read_line(&mut guess)
         .expect("Failed to read line");
     
-    let guess: u32 = guess.trim().parse().expect("Please type a number!");
+    let guess: u32 = match guess.trim().parse() {
+        Ok(num) => num,
+        Err(_) => {
+            println!("Are you dumb?");
+            continue;
+        }
+    };
 
     println!("You guessed: {guess}");
 
